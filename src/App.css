@@ -5,38 +5,46 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+ul {
+  padding: 0;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.containerBtns {
+  display: flex;
+  list-style: none;
+  gap: 8px;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.feedback {
+  display: flex;
+  list-style: none;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.cafeName {
+  color: darkblue;
+}
+.descriptionText {
+  display: flex;
+  justify-content: flex-start;
+  font-size: x-large;
+  margin-top: 20px;
+  padding-bottom: 30px;
 }
 
-.card {
-  padding: 2em;
+.good {
+  background-color: forestgreen;
+}
+.neutral {
+  background-color: goldenrod;
+}
+.bad {
+  background-color: firebrick;
+}
+.reset {
+  background-color: saddlebrown;
 }
 
-.read-the-docs {
-  color: #888;
+.notification {
+  font-size: x-large;
+  color: brown;
 }

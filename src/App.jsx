@@ -1,35 +1,72 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import { useState, useEffect } from "react";
+import "./App.css";
+import Description from "./components/description/description";
+import Options from "./components/options/options";
+import Feedback from "./components/feedback/feedback";
+import Notification from "./components/notification/notification";
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [choice, setChoice] = useState(() => {
+    const savedChoice = window.localStorage.getItem("saved-choice");
+    if (savedChoice !== null) {
+      return JSON.parse(savedChoice);
+    }
+    return {
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    };
+  });
+  useEffect(() => {
+    window.localStorage.setItem("saved-choice", JSON.stringify(choice));
+  }, [choice]);
+  const totalFeedback = choice.good + choice.neutral + choice.bad;
+  const PositiveFeedback = Math.round((choice.good / totalFeedback) * 100);
+  function updateFeedback(feedbackType) {
+    switch (feedbackType) {
+      case "good":
+        setChoice({
+          ...choice,
+          good: choice.good + 1,
+        });
+        break;
+      case "neutral":
+        setChoice({
+          ...choice,
+          neutral: choice.neutral + 1,
+        });
+        break;
+      case "bad":
+        setChoice({
+          ...choice,
+          bad: choice.bad + 1,
+        });
+        break;
+    }
+  }
+  function resetState() {
+    setChoice({
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    });
+  }
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Description />
+      <Options
+        option={updateFeedback}
+        remove={resetState}
+        amount={totalFeedback}
+      />
+      {totalFeedback == 0 && <Notification />}
+      {totalFeedback != 0 && (
+        <Feedback
+          myObj={choice}
+          amount={totalFeedback}
+          totalPositivPercents={PositiveFeedback}
+        />
+      )}
     </>
-  )
+  );
 }
-
-export default App
+export default App;
