@@ -54,8 +54,8 @@ function App() {
     <>
       <Description />
       <Options
-        option={updateFeedback}
-        remove={resetState}
+        onSelectFeedback={updateFeedback}
+        handleReset={resetState}
         amount={totalFeedback}
       />
       {totalFeedback == 0 && <Notification />}

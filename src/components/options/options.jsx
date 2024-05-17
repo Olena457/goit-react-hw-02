@@ -1,23 +1,23 @@
-export default function Options({ option, remove, amount }) {
-  function expressionsGood() {
+export default function Options({ onSelectFeedback, handleReset, amount }) {
+  function handleGoodFeedback() {
     const feedBack = "good";
-    option(feedBack);
+    onSelectFeedback(feedBack);
   }
-  function expressionNeutral() {
+  function handleNeutralFeedback() {
     const feedBack = "neutral";
-    option(feedBack);
+    onSelectFeedback(feedBack);
   }
-  function expressionBad() {
+  function handleBadFeedback() {
     const feedBack = "bad";
-    option(feedBack);
+    onSelectFeedback(feedBack);
   }
   function reset() {
-    remove();
+    handleReset();
   }
   return (
     <ul className="containerBtns">
       <li>
-        <button className="good" value={"good"} onClick={expressionsGood}>
+        <button className="good" value={"good"} onClick={handleGoodFeedback}>
           Good
         </button>
       </li>
@@ -25,13 +25,13 @@ export default function Options({ option, remove, amount }) {
         <button
           className="neutral"
           value={"neutral"}
-          onClick={expressionNeutral}
+          onClick={handleNeutralFeedback}
         >
           Neutral
         </button>
       </li>
       <li>
-        <button className="bad" value={"bad"} onClick={expressionBad}>
+        <button className="bad" value={"bad"} onClick={handleBadFeedback}>
           Bad
         </button>
       </li>
