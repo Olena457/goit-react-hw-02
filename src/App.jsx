@@ -5,7 +5,7 @@ import Options from "./components/options/options";
 import Feedback from "./components/feedback/feedback";
 import Notification from "./components/notification/notification";
 function App() {
-  const [choice, setChoice] = useState(() => {
+  const [choice, handleChoice] = useState(() => {
     const savedChoice = window.localStorage.getItem("saved-choice");
     if (savedChoice !== null) {
       return JSON.parse(savedChoice);
@@ -24,19 +24,19 @@ function App() {
   function updateFeedback(feedbackType) {
     switch (feedbackType) {
       case "good":
-        setChoice({
+        handleChoice({
           ...choice,
           good: choice.good + 1,
         });
         break;
       case "neutral":
-        setChoice({
+        handleChoice({
           ...choice,
           neutral: choice.neutral + 1,
         });
         break;
       case "bad":
-        setChoice({
+        handleChoice({
           ...choice,
           bad: choice.bad + 1,
         });
@@ -44,7 +44,7 @@ function App() {
     }
   }
   function resetState() {
-    setChoice({
+    handleChoice({
       good: 0,
       neutral: 0,
       bad: 0,
